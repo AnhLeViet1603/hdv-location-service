@@ -21,6 +21,7 @@ import org.springframework.data.redis.domain.geo.GeoReference;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
+import java.time.Instant;
 import java.util.List;
 
 @Service
@@ -35,6 +36,8 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public void updateLocation(LocationRequest req) {
+
+        long timestamp = Instant.now().toEpochMilli();
 
 //        ADD VỊ TRÍ VÀO REDIS
 //        DÙNG PIPELINE ĐỂ KẾT NỐI ĐẾN REDIS 1 LẦN
@@ -64,7 +67,7 @@ public class LocationServiceImpl implements LocationService {
             }
 
 //            UPDATE TIMESTAMP
-            connection.zAdd(lastSeenKey, req.getTimestamp(), member);
+            connection.zAdd(lastSeenKey, timestamp, member);
             return null;
         });
 
@@ -118,6 +121,7 @@ public class LocationServiceImpl implements LocationService {
         String geoAvailableKey = RedisKeys.GEO_AVAILABLE + event.getVehicleTypeId();
         String member = event.getDriverId() + ":" + event.getVehicleTypeId();
         redisTemplate.opsForZSet().remove(geoAvailableKey, member);
+        System.out.println(event.getDriverId() + ":" + event.getVehicleTypeId());
     }
 
     public boolean tryLockDriver(NearbyDriver driver, Long requestId) {

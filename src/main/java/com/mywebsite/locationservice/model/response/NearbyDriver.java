@@ -11,6 +11,6 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class NearbyDriver {
     Long driverId;
-    Double lat;
     Double lng;
+    Double lat;
 }

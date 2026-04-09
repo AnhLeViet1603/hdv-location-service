@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.List;
 
 @Repository
@@ -25,7 +26,7 @@ public class LocationLogRepositoryImpl implements LocationLogRepository {
                     ps.setDouble(2, argument.getLat());
                     ps.setDouble(3, argument.getLng());
                     ps.setLong(4, argument.getVehicleTypeId());
-                    ps.setTimestamp(5, new Timestamp(argument.getTimestamp()));
+                    ps.setTimestamp(5, Timestamp.from(Instant.now()));
                 });
     }
 }

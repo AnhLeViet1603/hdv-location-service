@@ -11,6 +11,4 @@ import lombok.experimental.FieldDefaults;
 public class DriverAcceptedEvent {
     Long driverId;
     Long vehicleTypeId;
-    Long tripId;
-    Long timestamp;
 }

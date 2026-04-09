@@ -11,8 +11,7 @@ import lombok.experimental.FieldDefaults;
 public class LocationRequest {
     Long driverId;
     Long vehicleTypeId;
-    Double lat;
     Double lng;
-    Long timestamp;
+    Double lat;
     String status;
 }

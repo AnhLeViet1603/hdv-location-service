@@ -21,7 +21,9 @@ public class DriverEventConsumer {
     )
     public void consumeDriverAccepted(DriverAcceptedEvent event) {
         try {
-            locationService.handleDriverAccepted(event);
+            if (event.getDriverId() != null && event.getVehicleTypeId() != null) {
+                locationService.handleDriverAccepted(event);
+            }
         } catch (Exception e) {
             log.error("Error processing DRIVER_ACCEPTED: {}", event, e);
             throw e; // để Kafka retry

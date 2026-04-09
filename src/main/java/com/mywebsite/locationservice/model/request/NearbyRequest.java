@@ -12,7 +12,7 @@ public class NearbyRequest {
     Long requestId;
     Double radiusKm;
     Integer limit;
-    Double lat;
     Double lng;
+    Double lat;
     Long vehicleTypeId;
 }
